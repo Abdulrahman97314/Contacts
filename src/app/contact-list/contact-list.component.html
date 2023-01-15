@@ -1,0 +1,39 @@
+<div class="container-fluid ">
+    <mat-form-field class="w-100 text-center">
+        <mat-label>Search by first name</mat-label>
+        <input [(ngModel)]="Search" type="text" matInput>
+    </mat-form-field>
+    <div class="row">
+        <div class="col-12">
+            <div class="pointer-event d-flex justify-content-between align-items-center bg-light rounded px-2 py-2 mb-3"
+                [routerLink]="['/AddNew']">
+                <h2 class="m-0">Add New Contacts</h2>
+                <span><i class="fa-solid fa-plus"></i></span>
+            </div>
+        </div>
+        <div class="col-12 pointer-event" *ngFor="let contact of contactList;let i=index">
+            <p *ngIf="contact.record.length>0&&Search==''" id={{contact.alphabet}} class="rounded text-white bg-dark p-2 my-3">{{contact.alphabet}}</p>
+            <div class="d-flex align-items-center justify-content-between my-1"
+                *ngFor="let item of contact.record|search:Search ; let j=index" [routerLink]="['/profile',i,j]">
+                <DIV class="d-flex align-items-center">
+                    <div>
+                    <img class="rounded-pill" width="70" src={{item.img}} alt="">
+                    <img *ngIf="!item.img" class="rounded-pill" width="70" src="assets/imgs/download.png" alt="">
+                    </div>
+                    <div class="px-3">
+                        <h2 class="m-0">{{item.FirstName}}</h2>
+                        <p>{{item.Email}}</p>
+                    </div>
+                </DIV>
+            </div>
+        </div>
+        <div *ngIf="contactList">
+            <ul *ngIf="Search==''" class="alphabet bg-dark rounded-pill m-0 p-1">
+                <li *ngFor="let item of contactList">
+                    <a *ngIf="item.record.length>0&&Search==''" class="px-1 text-white" routerLink="./"
+                        fragment="{{item.alphabet}}">{{item.alphabet}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

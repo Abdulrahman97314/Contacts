@@ -1,0 +1,26 @@
+<div class=" container-fluid">
+    <div class="text-center">
+        <div>
+            <img *ngIf="!profile.img" class="rounded-pill" src="assets/imgs/download.png" alt="">
+            <img class="rounded-pill" [src]="profile.img" alt="">
+        </div>
+        <div class="w-100 h-100">
+            <h2>{{profile.FirstName}} {{profile.LastName}}</h2>
+            <h2>{{profile.Number}}</h2>
+            <h2>{{profile.Email}}</h2>
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger me-1">Delete</button> 
+            <button [routerLink]="['/ContactList']" class="btn btn-dark ms-1">Back</button> 
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-3">
+                <h2>Are you sure you want to delete <br> {{profile.FirstName}} {{profile.LastName}} </h2>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-dark me-1" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger ms-1" (click)="Delete()" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
